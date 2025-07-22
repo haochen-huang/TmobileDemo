@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@font-face {
+  font-family: "Tele Neo";
+  src: url("~/assets/fonts/TeleNeo Office Regular.woff") format("woff");
+  font-weight: 400; /* 常规字体 */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Tele Neo";
+  src: url("~/assets/fonts/TeleNeo Bold.woff") format("woff");
+  font-weight: 700; /* 加粗字体 */
+  font-style: normal;
+}
+* {
+  font-family: "Tele Neo";
+}
+
+button,
+a {
+  cursor: pointer;
+}
+/* 
+/* 移除移动端滚动条宽度 */
+html,
+body {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+@layer components {
+  .container-px {
+    @apply px-[24px] md:px-[46px];
+  }
+}
