@@ -1,45 +1,49 @@
 <template>
-  <header
-    class="h-[80px] bg-white flex items-center justify-between px-6 md:px-12 xl:px-32 border-b border-gray-300 sticky top-0 z-10"
-  >
-    <div aria-hidden="true">
-      <img src="@/assets/img/logo.svg" alt="logo" />
-    </div>
-    <nav
-      class="absolute xl:static bottom-0 left-0 bg-gray-100 xl:bg-white overflow-hidden transition-all duration-300 transform-[translateY(100%)] xl:transform-[translateY(0%)] opacity-0 xl:opacity-100 items-center xl:flex text-sm whitespace-nowrap w-full xl:w-auto z-5 xl:h-auto"
-      :class="{
-        'opacity-100': isShowMenu,
-        'h-[300px]': isShowMenu,
-        'h-[0px]': !isShowMenu,
-      }"
-      :style="{}"
-    >
-      <ul
-        class="flex items-center flex-col xl:flex-row"
-        :class="{ flex: isShowMenu }"
+  <header class="header">
+    <div class="w-full xl:w-295 flex items-center justify-between">
+      <div aria-hidden="true">
+        <img class="object-fit" src="@/assets/img/logo.svg" alt="logo" />
+      </div>
+      <nav
+        class="nav"
+        :class="{
+          'opacity-100': isShowMenu,
+          'opacity-0': !isShowMenu,
+          'h-75': isShowMenu,
+          'h-0': !isShowMenu,
+        }"
       >
-        <li
-          class="px-[24px] py-[12px] cursor-pointer xl:h-auto h-[50px] flex items-center"
-          v-for="item in navList"
-          :key="item.name"
-          :class="item.extraClass"
+        <ul
+          class="flex items-center flex-col xl:flex-row"
+          :class="{ flex: isShowMenu }"
         >
-          <NuxtLink :to="item.path">{{ item.name }}</NuxtLink>
-        </li>
-        <li class="xl:h-auto h-[50px] flex items-center">
-          <NuxtLink
-            to="/"
-            class="px-[24px] py-[6px] xl:py-[12px] rounded-[22px] xl:rounded-[0px] xl:ml-[24px] cursor-pointer bg-pink-600 text-white"
+          <li
+            class="px-6 py-3 cursor-pointer xl:h-auto h-12.5 flex items-center"
+            v-for="item in navList"
+            :key="item.name"
+            :class="item.extraClass"
           >
-            Get Involved
-          </NuxtLink>
-        </li>
-      </ul>
-    </nav>
-    <div class="items-center flex xl:hidden">
-      <button class="p-1 cursor-pointer" @click="toggleMenu">
-        <img src="@/assets/img/menu.svg" alt="menu" />
-      </button>
+            <NuxtLink :to="item.path">{{ item.name }}</NuxtLink>
+          </li>
+          <li class="xl:h-auto h-12.5 flex items-center">
+            <NuxtLink
+              to="/"
+              class="px-6 py-1.5 xl:py-3 rounded-5.5 xl:rounded-none xl:ml-6 cursor-pointer bg-pink-600 text-white"
+            >
+              Get Involved
+            </NuxtLink>
+          </li>
+        </ul>
+      </nav>
+      <div class="items-center flex xl:hidden">
+        <button class="p-1 cursor-pointer" @click="toggleMenu">
+          <img
+            src="@/assets/img/menu.svg"
+            class="object-fit w-8 md:w-12"
+            alt="menu"
+          />
+        </button>
+      </div>
     </div>
   </header>
 </template>
@@ -73,16 +77,31 @@ const isShowMenu = ref(false);
 const toggleMenu = () => {
   isShowMenu.value = !isShowMenu.value;
 };
-// const NavtitemHeight = 50;
-// const navRef = ref<HTMLElement>();
-// watch(isShowMenu, (newVal) => {
-//   if (newVal) {
-//     navRef.value!.style.opacity = "1";
-//     navRef.value!.style.height =
-//       (navList.value.length + 1) * NavtitemHeight + "px";
-//   } else {
-//     navRef.value!.style.opacity = "0";
-//     navRef.value!.style.height = "0px";
-//   }
-// });
 </script>
+
+<style lang="css" scoped>
+@reference "tailwindcss";
+
+.header {
+  @apply h-20 bg-white w-full flex justify-center border-b border-gray-300 sticky top-0 z-10 px-6;
+  @variant xl {
+    @apply px-0;
+  }
+  @variant md {
+    @apply px-12;
+  }
+}
+.header-content {
+  @apply w-full flex items-center justify-between;
+  @variant xl {
+    @apply w-295;
+  }
+}
+.nav {
+  @apply absolute  bottom-0 left-0 bg-gray-100  overflow-hidden transition-all duration-300 translate-y-full items-center  text-sm whitespace-nowrap w-full z-5;
+
+  @variant xl {
+    @apply flex w-auto translate-y-0 opacity-100 bg-white static !h-auto;
+  }
+}
+</style>
